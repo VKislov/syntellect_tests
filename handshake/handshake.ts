@@ -1,6 +1,6 @@
 interface IPerson {
     personsHandshakesCounter: number
-    greatingsAll: (room: IRoom) => number
+    greatingsAll: (room: IRoom) => void
 }
 
 interface IRoom {
@@ -11,7 +11,7 @@ interface IRoom {
 
 
 export class Room implements IRoom {
-    #personInsideCounter = 1
+    #personInsideCounter = 0
     #handshakesCounter = 0
 
     get personsInsideCounter () {
@@ -37,12 +37,12 @@ export class Person implements IPerson {
     greatingsAll (room: IRoom) {        
         this.personsHandshakesCounter = room.personsInsideCounter
         room.handshakesCounter = room.handshakesCounter + this.personsHandshakesCounter
-        return room.increasePersonInside()
+        room.increasePersonInside()
     }
 
 }
 
-export function calcHandshakesForTenPerson (numberOfPerson = 9) {
+export function calcHandshakesForTenPerson (numberOfPerson = 10) {
     const room = new Room()
     let enteredPersonsCounter = 0
     
