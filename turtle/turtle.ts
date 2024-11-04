@@ -1,6 +1,16 @@
-const { log } = require("console")
+interface ITurtle {
+    currentPos: number
+    nightShiftLength: number
+    dailyShiftLength: number
+    _move: (value: number) => number
+}
 
-class Turtle {
+interface ITurtlelife extends ITurtle {
+    pathLength: number
+    dayCounter: number
+    moveToDestination: () => number
+}
+class Turtle implements ITurtle {
     #currentPos = 0
     nightShiftLength = -30
     dailyShiftLength = 50
@@ -22,13 +32,13 @@ class Turtle {
     }
 }
 
-class TurtleLife extends Turtle {
+export class TurtleLife extends Turtle implements ITurtlelife {
     pathLength = 100
     dayCounter = 1
 
     constructor(pathLength, nightShiftLength, dailyShiftLength) {
         super(nightShiftLength, dailyShiftLength)
-        if (nightShiftLength >= dailyShiftLength) throw new Error('dailyShiftLength must be greater than nightShiftLength')
+        if (nightShiftLength && dailyShiftLength && nightShiftLength >= dailyShiftLength) throw new Error('dailyShiftLength must be greater than nightShiftLength')
         pathLength && (this.pathLength = pathLength)
     }
 
@@ -49,8 +59,4 @@ class TurtleLife extends Turtle {
         }
         return this.dayCounter
     }
-}
-
-module.exports = {
-    TurtleLife,
 }

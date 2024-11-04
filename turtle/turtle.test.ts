@@ -1,15 +1,15 @@
-const { TurtleLife } = require('./turtle')
-const { describe, expect, test } = require('@jest/globals')
+import { TurtleLife } from './turtle'
+import { describe, expect, test } from '@jest/globals'
 
 describe('Turtle life', () => {
     test('default path length and variables of shifting', () => {
-        const turtle = new TurtleLife()
+        const turtle = new TurtleLife(null, null, null)
 
         expect(turtle.moveToDestination()).toEqual(4)
     })
 
     test('500 path length and default variables of shifting', () => {
-        const turtle = new TurtleLife(500)
+        const turtle = new TurtleLife(500, null, null)
 
         expect(turtle.moveToDestination()).toEqual(24)
     })
@@ -21,7 +21,7 @@ describe('Turtle life', () => {
     })
 
     test('default path length and dailyShift, but nightShift is -20', () => {
-        const turtle = new TurtleLife(null, -20)
+        const turtle = new TurtleLife(null, -20, null)
 
         expect(turtle.moveToDestination()).toEqual(3)
     })
